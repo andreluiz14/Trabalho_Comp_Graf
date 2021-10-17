@@ -1,0 +1,12 @@
+C:\Users\André Luiz\Desktop\Trabalho_Comp_Graf\OpenGL TK\OpenGL TK\bin\Debug\OpenGL TK.exe.config
+C:\Users\André Luiz\Desktop\Trabalho_Comp_Graf\OpenGL TK\OpenGL TK\bin\Debug\OpenGL TK.exe
+C:\Users\André Luiz\Desktop\Trabalho_Comp_Graf\OpenGL TK\OpenGL TK\bin\Debug\OpenGL TK.pdb
+C:\Users\André Luiz\Desktop\Trabalho_Comp_Graf\OpenGL TK\OpenGL TK\bin\Debug\OpenTK.dll
+C:\Users\André Luiz\Desktop\Trabalho_Comp_Graf\OpenGL TK\OpenGL TK\bin\Debug\OpenTK.pdb
+C:\Users\André Luiz\Desktop\Trabalho_Comp_Graf\OpenGL TK\OpenGL TK\bin\Debug\OpenTK.xml
+C:\Users\André Luiz\Desktop\Trabalho_Comp_Graf\OpenGL TK\OpenGL TK\bin\Debug\OpenTK.dll.config
+C:\Users\André Luiz\Desktop\Trabalho_Comp_Graf\OpenGL TK\OpenGL TK\obj\Debug\OpenGL TK.csproj.AssemblyReference.cache
+C:\Users\André Luiz\Desktop\Trabalho_Comp_Graf\OpenGL TK\OpenGL TK\obj\Debug\OpenGL TK.csproj.CoreCompileInputs.cache
+C:\Users\André Luiz\Desktop\Trabalho_Comp_Graf\OpenGL TK\OpenGL TK\obj\Debug\OpenGL TK.csproj.CopyComplete
+C:\Users\André Luiz\Desktop\Trabalho_Comp_Graf\OpenGL TK\OpenGL TK\obj\Debug\OpenGL TK.exe
+C:\Users\André Luiz\Desktop\Trabalho_Comp_Graf\OpenGL TK\OpenGL TK\obj\Debug\OpenGL TK.pdb
