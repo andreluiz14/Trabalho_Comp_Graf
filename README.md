@@ -1,1 +1,1 @@
-Trabalho de Computação gráfica com Api openGL
+Trabalho de Computação gráfica com a Api openGL
