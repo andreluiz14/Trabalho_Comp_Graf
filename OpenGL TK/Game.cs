@@ -114,7 +114,7 @@ namespace OpenGL_TK
         }
         void loaded(object o, EventArgs e)
         {
-            GL.ClearColor(0.5f,0.0f,0.0f,0.0f);
+            GL.ClearColor(0.0f,0.0f,0.0f,0.0f);
 
             // Habilita profundidade,
             // caso contrário os objetos desenhados ficam sobrepostos
