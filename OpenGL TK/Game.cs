@@ -26,21 +26,21 @@ namespace OpenGL_TK
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
 
-            // Plano Cartesiano / tamanho dos quadrantes
-            GL.Ortho(-50.0f, 50.0f, -50.0f, 50.0f, -1.0f, 1.0f);
+            Matrix4 matrix = Matrix4.Perspective(45.0f, window.Width / window.Height, 1.0f, 100.0f);
+            GL.LoadMatrix(ref matrix);
             GL.MatrixMode(MatrixMode.Modelview);
         }
         void renderF(object o, EventArgs e)
         {
             GL.LoadIdentity();
-            GL.Clear(ClearBufferMask.ColorBufferBit);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
+            GL.Translate(0.0, 0.0, -45.0);
+            GL.Rotate(theta, 1.0, 0.0, 0.0);
             GL.Rotate(theta, 0.0, 0.0, 1.0);
+
             GL.Begin(BeginMode.Quads);
-            DrawCube();
-            
-            //GL.Begin(BeginMode.Triangles);
-            //DrawTriangle();
+            CoordenadasCubo();
             GL.End();
             window.SwapBuffers();
 
@@ -48,7 +48,46 @@ namespace OpenGL_TK
             if (theta > 360)
                 theta -= 360;
         }
-        void DrawCube()
+        void CoordenadasCubo()
+        {
+            GL.Color3(1.0, 1.0, 0.0);
+            GL.Vertex3(-10.0, 10.0, 10.0);
+            GL.Vertex3(-10.0, 10.0, -10.0);
+            GL.Vertex3(-10.0, -10.0, -10.0);
+            GL.Vertex3(-10.0, -10.0, 10.0);
+
+            GL.Color3(1.0, 0.0, 1.0);
+            GL.Vertex3(10.0, 10.0, 10.0);
+            GL.Vertex3(10.0, 10.0, -10.0);
+            GL.Vertex3(10.0, -10.0, -10.0);
+            GL.Vertex3(10.0, -10.0, 10.0);
+
+            GL.Color3(0.0, 1.0, 1.0);
+            GL.Vertex3(10.0, -10.0, 10.0);
+            GL.Vertex3(10.0, -10.0, -10.0);
+            GL.Vertex3(-10.0, -10.0, -10.0);
+            GL.Vertex3(-10.0, -10.0, 10.0);
+
+            GL.Color3(1.0, 0.0, 0.0);
+            GL.Vertex3(10.0, 10.0, 10.0);
+            GL.Vertex3(10.0, 10.0, -10.0);
+            GL.Vertex3(-10.0, 10.0, -10.0);
+            GL.Vertex3(-10.0, 10.0, 10.0);
+
+            GL.Color3(0.0, 1.0, 0.0);
+            GL.Vertex3(10.0, 10.0, -10.0);
+            GL.Vertex3(10.0, -10.0, -10.0);
+            GL.Vertex3(-10.0, -10.0, -10.0);
+            GL.Vertex3(-10.0, 10.0, -10.0);
+
+            GL.Color3(0.0, 0.0, 1.0);
+            GL.Vertex3(10.0, 10.0, 10.0);
+            GL.Vertex3(10.0, -10.0, 10.0);
+            GL.Vertex3(-10.0, -10.0, 10.0);
+            GL.Vertex3(-10.0, 10.0, 10.0);
+
+        }
+        void DrawQuad()
         {
             GL.Color3(1.0, 0.0, 0.0);
             GL.Vertex2(20.0, 20.0);
@@ -74,6 +113,10 @@ namespace OpenGL_TK
         void loaded(object o, EventArgs e)
         {
             GL.ClearColor(0.0f,0.0f,0.0f,0.0f);
+
+            // Habilita profundidade,
+            // caso contrário os objetos desenhados ficam sobrepostos
+            GL.Enable(EnableCap.DepthTest);
         }
     }
 }
