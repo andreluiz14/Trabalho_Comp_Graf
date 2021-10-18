@@ -6,6 +6,7 @@ namespace OpenGL_TK
 {
     class Game
     {
+        double theta = 0.0;
         GameWindow window;
         public Game(GameWindow window)
         {
@@ -24,24 +25,52 @@ namespace OpenGL_TK
             GL.Viewport(0, 0, window.Width, window.Height);
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
-            GL.Ortho(0.0f, 50.0f, 0.0f, 50.0f, -1.0f, 1.0f);
+
+            // Plano Cartesiano / tamanho dos quadrantes
+            GL.Ortho(-50.0f, 50.0f, -50.0f, 50.0f, -1.0f, 1.0f);
             GL.MatrixMode(MatrixMode.Modelview);
         }
         void renderF(object o, EventArgs e)
         {
+            GL.LoadIdentity();
             GL.Clear(ClearBufferMask.ColorBufferBit);
-            GL.Begin(BeginMode.Triangles);
+
+            GL.Rotate(theta, 0.0, 0.0, 1.0);
+            GL.Begin(BeginMode.Quads);
+            DrawCube();
             
+            //GL.Begin(BeginMode.Triangles);
+            //DrawTriangle();
+            GL.End();
+            window.SwapBuffers();
+
+            theta += 1.0;
+            if (theta > 360)
+                theta -= 360;
+        }
+        void DrawCube()
+        {
+            GL.Color3(1.0, 0.0, 0.0);
+            GL.Vertex2(20.0, 20.0);
+            GL.Color3(0.0, 1.0, 0.0);
+            GL.Vertex2(-20.0, 20.0);
+            GL.Color3(0.0, 0.0, 1.0);
+            GL.Vertex2(-20.0, -20.0);
+            GL.Color3(1.0, 1.0, 0.0);
+            GL.Vertex2(20.0, -20.0);
+        }
+        void DrawTriangle()
+        {
+            GL.Color3(1.0, 0.0, 0.0);
             // 1° vértice
             GL.Vertex2(1.0, 5.0);
             // 2° vértice
-            GL.Vertex2(20.0, 5.0);
+            GL.Color3(0.0, 1.0, 0.0);
+            GL.Vertex2(40.0, 5.0);
             // altura
-            GL.Vertex2(10.0, 20.0);
-            GL.End();
-            window.SwapBuffers();
+            GL.Color3(0.0, 0.0, 1.0);
+            GL.Vertex2(20.0, 40.0);
         }
-
         void loaded(object o, EventArgs e)
         {
             GL.ClearColor(0.0f,0.0f,0.0f,0.0f);
