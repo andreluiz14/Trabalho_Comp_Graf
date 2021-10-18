@@ -7,6 +7,7 @@ namespace OpenGL_TK
     class Game
     {
         double theta = 0.0;
+        double eixoX = 10, eixoY = 10, eixoZ = 10;
         GameWindow window;
         public Game(GameWindow window)
         {
@@ -18,7 +19,7 @@ namespace OpenGL_TK
             window.Load += loaded;
             window.Resize += resize;
             window.RenderFrame += renderF;
-            window.Run(1.0 / 60.0);
+            window.Run(1.0, 60.0);
         }
         void resize(object ob, EventArgs e)
         {
@@ -35,6 +36,7 @@ namespace OpenGL_TK
             GL.LoadIdentity();
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
+            // Movido para traz para que possa ser renderizado
             GL.Translate(0.0, 0.0, -45.0);
             GL.Rotate(theta, 1.0, 0.0, 0.0);
             GL.Rotate(theta, 0.0, 0.0, 1.0);
@@ -51,40 +53,40 @@ namespace OpenGL_TK
         void CoordenadasCubo()
         {
             GL.Color3(1.0, 1.0, 0.0);
-            GL.Vertex3(-10.0, 10.0, 10.0);
-            GL.Vertex3(-10.0, 10.0, -10.0);
-            GL.Vertex3(-10.0, -10.0, -10.0);
-            GL.Vertex3(-10.0, -10.0, 10.0);
+            GL.Vertex3(-eixoX, eixoY, eixoZ);
+            GL.Vertex3(-eixoX, eixoY, -eixoZ);
+            GL.Vertex3(-eixoX, -eixoY, -eixoZ);
+            GL.Vertex3(-eixoX, -eixoY, eixoZ);
 
             GL.Color3(1.0, 0.0, 1.0);
-            GL.Vertex3(10.0, 10.0, 10.0);
-            GL.Vertex3(10.0, 10.0, -10.0);
-            GL.Vertex3(10.0, -10.0, -10.0);
-            GL.Vertex3(10.0, -10.0, 10.0);
+            GL.Vertex3(eixoX, eixoY, eixoZ);
+            GL.Vertex3(eixoX, eixoY, -eixoZ);
+            GL.Vertex3(eixoX, -eixoY, -eixoZ);
+            GL.Vertex3(eixoX, -eixoY, eixoZ);
 
             GL.Color3(0.0, 1.0, 1.0);
-            GL.Vertex3(10.0, -10.0, 10.0);
-            GL.Vertex3(10.0, -10.0, -10.0);
-            GL.Vertex3(-10.0, -10.0, -10.0);
-            GL.Vertex3(-10.0, -10.0, 10.0);
+            GL.Vertex3(eixoX, -eixoY, eixoZ);
+            GL.Vertex3(eixoX, -eixoY, -eixoZ);
+            GL.Vertex3(-eixoX, -eixoY, -eixoZ);
+            GL.Vertex3(-eixoX, -eixoY, eixoZ);
 
             GL.Color3(1.0, 0.0, 0.0);
-            GL.Vertex3(10.0, 10.0, 10.0);
-            GL.Vertex3(10.0, 10.0, -10.0);
-            GL.Vertex3(-10.0, 10.0, -10.0);
-            GL.Vertex3(-10.0, 10.0, 10.0);
+            GL.Vertex3(eixoX, eixoY, eixoZ);
+            GL.Vertex3(eixoX, eixoY, -eixoZ);
+            GL.Vertex3(-eixoX, eixoY, -eixoZ);
+            GL.Vertex3(-eixoX, eixoY, eixoZ);
 
             GL.Color3(0.0, 1.0, 0.0);
-            GL.Vertex3(10.0, 10.0, -10.0);
-            GL.Vertex3(10.0, -10.0, -10.0);
-            GL.Vertex3(-10.0, -10.0, -10.0);
-            GL.Vertex3(-10.0, 10.0, -10.0);
+            GL.Vertex3(eixoX, eixoY, -eixoZ);
+            GL.Vertex3(eixoX, -eixoY, -eixoZ);
+            GL.Vertex3(-eixoX, -eixoY, -eixoZ);
+            GL.Vertex3(-eixoX, eixoY, -eixoZ);
 
             GL.Color3(0.0, 0.0, 1.0);
-            GL.Vertex3(10.0, 10.0, 10.0);
-            GL.Vertex3(10.0, -10.0, 10.0);
-            GL.Vertex3(-10.0, -10.0, 10.0);
-            GL.Vertex3(-10.0, 10.0, 10.0);
+            GL.Vertex3(eixoX, eixoY, eixoZ);
+            GL.Vertex3(eixoX, -eixoY, eixoZ);
+            GL.Vertex3(-eixoX, -eixoY, eixoZ);
+            GL.Vertex3(-eixoX, eixoY, eixoZ);
 
         }
         void DrawQuad()
@@ -112,7 +114,7 @@ namespace OpenGL_TK
         }
         void loaded(object o, EventArgs e)
         {
-            GL.ClearColor(0.0f,0.0f,0.0f,0.0f);
+            GL.ClearColor(0.5f,0.0f,0.0f,0.0f);
 
             // Habilita profundidade,
             // caso contrário os objetos desenhados ficam sobrepostos
