@@ -30,6 +30,15 @@ namespace OpenGL_TK
         void renderF(object o, EventArgs e)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit);
+            GL.Begin(BeginMode.Triangles);
+            
+            // 1° vértice
+            GL.Vertex2(1.0, 5.0);
+            // 2° vértice
+            GL.Vertex2(20.0, 5.0);
+            // altura
+            GL.Vertex2(10.0, 20.0);
+            GL.End();
             window.SwapBuffers();
         }
 
