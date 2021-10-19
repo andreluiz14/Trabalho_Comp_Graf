@@ -7,7 +7,7 @@ namespace OpenGL_TK
         static void Main(string[] args)
         {
             GameWindow window = new GameWindow(700, 700);
-            Game janela = new Game(window);
+            Game gm = new Game(window);
         }
 
     }
