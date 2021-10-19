@@ -7,7 +7,7 @@ namespace OpenGL_TK
     class Game
     {
         double theta = 0.0;
-        double eixoX = 10, eixoY = 10, eixoZ = 10;
+        double eixoX = 5, eixoY = 5, eixoZ = 5;
         GameWindow window;
         public Game(GameWindow window)
         {
@@ -42,6 +42,12 @@ namespace OpenGL_TK
             GL.Rotate(theta, 0.0, 0.0, 1.0);
 
             GL.Begin(BeginMode.Quads);
+            CoordenadasCubo();
+
+
+            GL.Translate(5.0, 5.0, -45.0);
+            GL.Rotate(theta, 1.0, 0.0, 0.0);
+            GL.Rotate(theta, 0.0, 0.0, 1.0);
             CoordenadasCubo();
             GL.End();
             window.SwapBuffers();
