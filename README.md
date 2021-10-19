@@ -1,2 +1,3 @@
-# Trabalho_Comp_Graf
- Trabalho de Computação gráfica com Api openGL
+# Objetivos do projeto
+- Criar um objeto em 3D e renderizar utilizando openGL
+- Trabalho de Computação gráfica com a Api openGL
