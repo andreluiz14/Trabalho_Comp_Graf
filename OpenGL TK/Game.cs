@@ -30,8 +30,6 @@ namespace OpenGL_TK
 
             Matrix4 matrix = Matrix4.Perspective(45.0f, window.Width / window.Height, 1.0f, 100.0f);
             GL.LoadMatrix(ref matrix);
-            // Plano Cartesiano / tamanho dos quadrantes
-            GL.Ortho(-50.0f, 50.0f, -50.0f, 50.0f, -1.0f, 1.0f);
             GL.MatrixMode(MatrixMode.Modelview);
         }
         void renderF(object o, EventArgs e)
@@ -47,10 +45,6 @@ namespace OpenGL_TK
             GL.Begin(BeginMode.Quads);
             CoordenadasCubo();
 
-            GL.Translate(5.0, 5.0, -45.0);
-            GL.Rotate(theta, 1.0, 0.0, 0.0);
-            GL.Rotate(theta, 0.0, 0.0, 1.0);
-            CoordenadasCubo();
             GL.End();
             window.SwapBuffers();
 
