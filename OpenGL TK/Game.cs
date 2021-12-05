@@ -7,8 +7,9 @@ namespace OpenGL_TK
 {
     class Game
     {
+        int textura;
         double theta = 0.0;
-        double eixoX = 5, eixoY = 5, eixoZ = 5;
+        double eixoX = 10, eixoY = 10, eixoZ = 10;
         GameWindow window;
         public Game(GameWindow window)
         {
@@ -66,44 +67,69 @@ namespace OpenGL_TK
             // Frente
             // Vetor normal, normal vector
             GL.Normal3(0.0, 0.0, 1.0);
-            GL.Vertex3(-eixoX, eixoY, eixoZ);
-            GL.Vertex3(-eixoX, eixoY, -eixoZ);
-            GL.Vertex3(-eixoX, -eixoY, -eixoZ);
+            //Especificar a coordena da textura
+            GL.TexCoord2(0,0);
             GL.Vertex3(-eixoX, -eixoY, eixoZ);
-            
+            GL.TexCoord2(1, 0);
+            GL.Vertex3(eixoX, -eixoY, eixoZ);
+            GL.TexCoord2(1, 1);
+            GL.Vertex3(eixoX, eixoY, eixoZ);
+            GL.TexCoord2(0, 1);
+            GL.Vertex3(-eixoX, eixoY, eixoZ);
+
             // Atras
             GL.Normal3(0.0, 0.0, -1.0);
+            GL.TexCoord2(0,0);
             GL.Vertex3(eixoX, eixoY, eixoZ);
+            GL.TexCoord2(1, 0);
             GL.Vertex3(eixoX, eixoY, -eixoZ);
+            GL.TexCoord2(1, 1);
             GL.Vertex3(eixoX, -eixoY, -eixoZ);
+            GL.TexCoord2(0, 1);
             GL.Vertex3(eixoX, -eixoY, eixoZ);
 
             // Topo
             GL.Normal3(0.0, 1.0, 0.0);
+            GL.TexCoord2(0,0);
             GL.Vertex3(eixoX, -eixoY, eixoZ);
+            GL.TexCoord2(1, 0);
             GL.Vertex3(eixoX, -eixoY, -eixoZ);
+            GL.TexCoord2(1, 1);
             GL.Vertex3(-eixoX, -eixoY, -eixoZ);
+            GL.TexCoord2(0, 1);
             GL.Vertex3(-eixoX, -eixoY, eixoZ);
 
             // Base
             GL.Normal3(0.0, -0 + 1, 0.0);
+            GL.TexCoord2(0,0);
             GL.Vertex3(eixoX, eixoY, eixoZ);
+            GL.TexCoord2(1, 0);
             GL.Vertex3(eixoX, eixoY, -eixoZ);
+            GL.TexCoord2(1, 1);
             GL.Vertex3(-eixoX, eixoY, -eixoZ);
+            GL.TexCoord2(0, 1);
             GL.Vertex3(-eixoX, eixoY, eixoZ);
 
             // Direita
             GL.Normal3(1.0, 0.0, 0.0);
+            GL.TexCoord2(0,0);
             GL.Vertex3(eixoX, eixoY, -eixoZ);
+            GL.TexCoord2(1, 0);
             GL.Vertex3(eixoX, -eixoY, -eixoZ);
+            GL.TexCoord2(1, 1);
             GL.Vertex3(-eixoX, -eixoY, -eixoZ);
+            GL.TexCoord2(0, 1);
             GL.Vertex3(-eixoX, eixoY, -eixoZ);
 
             // Esquerda
             GL.Normal3(-1.0, 0.0, 0.0);
+            GL.TexCoord2(0,0);
             GL.Vertex3(eixoX, eixoY, eixoZ);
+            GL.TexCoord2(1, 0);
             GL.Vertex3(eixoX, -eixoY, eixoZ);
+            GL.TexCoord2(1, 1);
             GL.Vertex3(-eixoX, -eixoY, eixoZ);
+            GL.TexCoord2(0, 1);
             GL.Vertex3(-eixoX, eixoY, eixoZ);
 
             GL.End();
@@ -143,8 +169,8 @@ namespace OpenGL_TK
             GL.Enable(EnableCap.Lighting);
 
             float[] luzPosicao = { 20f, 20f, 60f};
-            float[] luzDiffuse = { 1.0f, 0.0f, 0.0f };
-            float[] luzAmbiente = { 1.0f, 0.0f, 0.0f };
+            float[] luzDiffuse = { 1.0f, 1.0f, 1.0f };
+            float[] luzAmbiente = { 0.5f, 0.5f, 0.5f };
             GL.Light(LightName.Light0, LightParameter.Position, luzPosicao);
             GL.Light(LightName.Light0, LightParameter.Diffuse, luzDiffuse);
 
@@ -153,6 +179,25 @@ namespace OpenGL_TK
 
             GL.Enable(EnableCap.Light0);
 
+            // Textura
+            GL.Enable(EnableCap.Texture2D);
+            GL.GenTextures(1, out textura);
+            GL.BindTexture(TextureTarget.Texture2D, textura);
+            System.Drawing.Imaging.BitmapData texData = Loadimagem(@"C:\Users\André Luiz\Documents\GitHub\Trabalho_Comp_Graf\Textura\Caixa.bmp");
+            GL.TexImage2D(TextureTarget.Texture2D, 0, OpenTK.Graphics.OpenGL.PixelInternalFormat.Rgb, texData.Width, texData.Height,
+                0,OpenTK.Graphics.OpenGL.PixelFormat.Bgr, PixelType.UnsignedByte, texData.Scan0);
+            GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
+        }
+        System.Drawing.Imaging.BitmapData Loadimagem(string pastaCaminho)
+        {
+            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(pastaCaminho);
+
+            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, bmp.Width, bmp.Height);
+            // Extrair o bitmap da imagem
+            System.Drawing.Imaging.BitmapData bmpData = bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            bmp.UnlockBits(bmpData);
+
+            return bmpData;
         }
     }
 }
